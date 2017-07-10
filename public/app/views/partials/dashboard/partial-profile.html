@@ -1,0 +1,189 @@
+<div class="page-header">
+	<h1>Welcome {{ pc.welcome }}</h1>
+</div>
+<div class="alert alert-info"  ng-if="alc.adsListInfo" role="alert">{{ alc.adsListInfoMessage }}</div>
+<div class="alert alert-danger"  ng-if="pc.profileError" role="alert">{{ mac.profileMessage }}</div>
+<div class="alert alert-success"  ng-if="pc.profileSuccess" role="alert">Profile modified successfully!</div>
+<div class="col-sm-offset-2 col-sm-4 col-md-offset-10 col-md-2">
+	<button class="btn btn-danger btn-block" ng-click="pc.delConfirm()">Delete account</button>
+</div>
+<div class="col-sm-4 col-md-4">
+	<h2 class="col-form-legend">Profile Pic</h2>
+	<hr>
+	<img class="img-rounded center-block" ng-src="app/assets/img/profile/{{ pc.photo }}" width="128px"/>
+	<button class="btn btn-primary" ngf-select="pc.upload(file)" ng-model="file" name="file" ngf-pattern="'image/*'"
+	ngf-accept="'image/*'" ngf-max-size="4MB" ngf-min-height="100"
+	ngf-resize="{width: 128, height: 128}">Upload</button>
+	<div class="alert alert-danger"  ng-if="pc.uploadError" role="alert">Error uploading the image</div>
+	<div class="alert alert-success"  ng-if="pc.uploadSuccess" role="alert">Profile picture succesfully updated</div>
+</div>
+<div>
+	<form name="updateProfileForm" ng-submit="pc.submitForm(updateProfileForm.$valid)" novalidate>
+		<div class="col-sm-8 col-md-8">
+			<h2 class="col-form-legend">Personal Data</h2>
+			<hr>
+			<div class="form-group has-feedback" ng-class="{ 'has-error': updateProfileForm.firstName.$dirty && updateProfileForm.firstName.$invalid, 'has-success': updateProfileForm.firstName.$dirty && updateProfileForm.firstName.$valid }">
+				<label class="col-form-label sr-only" for="inputfirstName">First name</label>
+				<input id="inputfirstName" name="firstName" ng-model="pc.firstName" class="form-control" type="text" autofocus placeholder="First name" ng-maxlength="256" required ng-disabled="!pc.modify"/>
+				<span ng-show="updateProfileForm.firstName.$dirty && updateProfileForm.firstName.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+				<span ng-show="updateProfileForm.firstName.$dirty && updateProfileForm.firstName.$invalid" class="glyphicon glyphicon-remove  form-control-feedback"></span>
+				<div class="help-block with-errors" ng-messages="updateProfileForm.firstName.$error" ng-if="updateProfileForm.firstName.$dirty">
+					<p ng-message="required">Your first name is required.</p>
+					<p ng-message="maxlength">Your last name is too long.</p>
+				</div>
+			</div>
+			<div class="form-group has-feedback" ng-class="{ 'has-error': updateProfileForm.lastName.$dirty && updateProfileForm.lastName.$invalid, 'has-success': updateProfileForm.lastName.$dirty && updateProfileForm.lastName.$valid }">
+				<label class="col-form-label sr-only" for="inputLastName">Last name</label>
+				<input id="inputLastName" name="lastName" ng-model="pc.lastName" class="form-control" type="text" autofocus placeholder="Last name" ng-maxlength="256" required ng-disabled="!pc.modify"/>
+				<span ng-show="updateProfileForm.lastName.$dirty && updateProfileForm.lastName.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+				<span ng-show="updateProfileForm.lastName.$dirty && updateProfileForm.lastName.$invalid" class="glyphicon glyphicon-remove  form-control-feedback"></span>
+				<div class="help-block with-errors" ng-messages="updateProfileForm.lastName.$error" ng-if="updateProfileForm.lastName.$dirty">
+					<p ng-message="required">Your last name is required.</p>
+					<p ng-message="maxlength">Your last name is too long.</p>
+				</div>
+			</div>
+			<div class="form-group has-feedback" ng-class="{ 'has-error': updateProfileForm.phoneNumber.$dirty && updateProfileForm.phoneNumber.$invalid, 'has-success': updateProfileForm.phoneNumber.$dirty && updateProfileForm.phoneNumber.$valid }">
+				<label class="col-form-label sr-only" for="inputPhoneNumber">Phone Number</label>
+				<input id="inputPhoneNumber" name="phoneNumber" ng-model="pc.phoneNumber" class="form-control" type="text" autofocus placeholder="Phone number (example: 953898989)" ng-maxlength="32" phone-validator required ng-disabled="!pc.modify"/>
+				<span ng-show="updateProfileForm.phoneNumber.$dirty && updateProfileForm.phoneNumber.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+				<span ng-show="updateProfileForm.phoneNumber.$dirty && updateProfileForm.phoneNumber.$invalid" class="glyphicon glyphicon-remove  form-control-feedback"></span>
+				<div class="help-block" ng-messages="updateProfileForm.phoneNumber.$error" ng-if="updateProfileForm.phoneNumber.$dirty">
+					<p ng-message="required">Your phone number is required. </p>
+					<p ng-message="maxlength">Your phone number is too long. </p>
+					<p ng-message="phone-validator">Enter a valid phone number. </p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-form-label sr-only" for="inputAddress">Address</label>
+				<input id="inputAddress" name="address" type="text" class="form-control" g-places-autocomplete force-selection="true" options="pc.autoCompleteOptions" ng-model="pc.address" placeholder="Insert a City, Address, Postal Code..." autocomplete="off" ng-disabled="!pc.modify"/>
+			</div>
+		</div>
+		<div class="col-sm-4 col-md-4" ng-if="!pc.modify">
+			<h2 class="col-form-legend">Other Data</h2>
+			<hr>
+			<dl class="dl-vertical">
+				<dt>Experience</dt>
+				<dd>{{ pc.experience }}</dd>
+				<dt>Socio-cultural animator</dt>
+				<dd>{{ pc.monitor?'yes':'no' }}</dd>
+				<dt>First Aid or Lifeguard</dt>
+				<dd>{{ pc.firstAid?'yes':'no' }}</dd>
+				<dt>Degree in Early Childhood Education</dt>
+				<dd>{{ pc.eduTitle?'yes':'no' }}</dd>
+				<dt>Drive license</dt>
+				<dd>{{ pc.driveLicense?'yes':'no' }}</dd>
+				<dt>Smoker</dt>
+				<dd>{{ pc.smoker?'yes':'no' }}</dd>
+			</dl>
+		</div>
+		<div class="col-sm-6 col-md-6" ng-if="pc.modify">
+			<h2 class="col-form-legend">Other Data</h2>
+			<hr>
+			<div class="form-group">
+				<legend class="col-form-legend">Experience</legend>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input class="form-check-input" type="radio" ng-model="pc.experience" value="No experience">&nbsp;No experience
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input class="form-check-input" type="radio" ng-model="pc.experience" value="1 to 2 years">&nbsp;1 to 2 years
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input class="form-check-input" type="radio" ng-model="pc.experience" value="2 to 5 years">&nbsp;2 to 5 years
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input class="form-check-input" type="radio" ng-model="pc.experience" value="more than 5 years">&nbsp;more than 5 years
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input class="form-check-input" type="radio" ng-model="pc.experience" value="more than 10 years" ng-selected="pc.experience=='more than 10 years'">&nbsp;more than 10 years
+					</label>
+				</div>
+			</div><br>
+			<div class="form-group">
+				<legend class="col-form-legend">Formation</legend>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input class="form-check-input" ng-model="pc.monitor" type="checkbox">&nbsp;Socio-cultural animator
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input class="form-check-input" ng-model="pc.firstAid" type="checkbox">&nbsp;First Aid or lifeguard
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input class="form-check-input" ng-model="pc.eduTitle" type="checkbox">&nbsp;Degree in Early Childhood Education
+					</label>
+				</div>
+			</div><br>
+			<div class="form-group">
+				<legend class="col-form-legend">Do you have a drive license?</legend>
+				<select class="custom-select" ng-model="pc.driveLicense">
+					<option ng-value=true>Yes</option>
+					<option ng-value=false>No</option>
+				</select>
+			</div><br>
+			<div class="form-group">
+				<legend class="col-form-legend">Are you smoker?</legend>
+				<select class="custom-select" ng-model="pc.smoker">
+					<option ng-value=true>Yes</option>
+					<option ng-value=false>No</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-sm-4 col-md-4">
+			<h2 class="col-form-legend">Account data</h2>
+			<hr>
+			<div class="form-group has-feedback"
+				ng-class="{ 'has-error': updateProfileForm.email.$dirty && updateProfileForm.email.$invalid, 'has-success': updateProfileForm.email.$dirty && updateProfileForm.email.$valid }">
+				<label class="col-form-label sr-only" for="inputEmail">Email</label>
+				<input id="inputEmail" name="email" ng-model="pc.email" class="form-control" type="email" autofocus placeholder="Email (example: you@email.com)" ng-maxlength="320" required ng-disabled="!pc.modify"/>
+				<span ng-show="updateProfileForm.email$dirty && updateProfileForm.email.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+				<span ng-show="updateProfileForm.email.$dirty && updateProfileForm.email.$invalid" class="glyphicon glyphicon-remove  form-control-feedback"></span>
+				<div class="help-block" ng-messages="updateProfileForm.email.$error" ng-if="updateProfileForm.email.$dirty">
+					<p ng-message="required">Your email is required. You will use it for signing in later :)</p>
+					<p ng-message="maxlength">Your email is too long. </p>
+					<p ng-message="email">Please, enter a valid email.</p>
+				</div>
+			</div>
+			<div class="alert alert-info" ng-if="updateProfileForm.password.$invalid && updateProfileForm.passwordR.$invalid">Passwords must contain at least one uppercase letter, one lowercase, and a number.</div>
+			<div class="form-group has-feedback" ng-class="{ 'has-error': updateProfileForm.password.$dirty && updateProfileForm.password.$invalid, 'has-success': updateProfileForm.email.$dirty && updateProfileForm.password.$valid }">
+				<label class="sr-only" for="inputPassword">Password</label>
+				<input id="inputPassword" name="password" ng-model="pc.password" class="form-control" type="password" autofocus placeholder="Enter your password" ng-minlength="8" ng-maxlength="256" password-validator required ng-disabled="!pc.modify">
+				<span ng-show="updateProfileForm.password.$dirty && updateProfileForm.password.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+				<span ng-show="updateProfileForm.password.$dirty && updateProfileForm.password.$invalid" class="glyphicon glyphicon-remove  form-control-feedback"></span>
+				<div class="help-block" ng-messages="updateProfileForm.password.$error" ng-if="updateProfileForm.password.$dirty">
+					<p ng-message="required">Please, fullfill correctly the password field</p>
+					<p ng-message="minlength">Passwords is too short! Must contain at least 8 characters</p>
+					<p ng-message="maxlength=">Passwords is too long</p>
+					<p ng-message="password-validator">Passwords must contain at least one uppercase letter, one lowercase, and a number.</p>
+				</div>
+			</div>
+			<div class="form-group has-feedback" ng-class="{ 'has-error': updateProfileForm.passwordR.$dirty && updateProfileForm.passwordR.$invalid, 'has-success': updateProfileForm.passwordR.$dirty && updateProfileForm.passwordR.$valid }">
+				<label class="sr-only" for="inputPasswordR">PasswordRepeat</label>
+				<input id="inputPasswordR" name="passwordR" ng-model="pc.passwordR" class="form-control" type="password" autofocus placeholder="Repeat your password" ng-minlength="8" ng-maxlength="256" password-validator required compare-to="pc.password" ng-disabled="!pc.modify">
+				<span ng-show="updateProfileForm.passwordR.$dirty && updateProfileForm.passwordR.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+				<span ng-show="updateProfileForm.passwordR.$dirty && updateProfileForm.passwordR.$invalid" class="glyphicon glyphicon-remove  form-control-feedback"></span>
+				<div class="help-block" ng-messages="updateProfileForm.passwordR.$error" ng-if="updateProfileForm.passwordR.$dirty">
+					<p ng-message="required">Please, fullfill correctly the repeat password field</p>
+					<p ng-message="minlength">Passwords is too short! Must contain at least 8 characters</p>
+					<p ng-message="maxlength=">Passwords is too long</p>
+					<p ng-message="compareTo">Passwords doesn't match!</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-offset-2 col-sm-4 col-md-offset-10 col-md-2">
+			<button class="btn btn-warning btn-block" ng-model="pc.modify" ng-click="pc.modify = ! pc.modify">{{ pc.modify?"Cancel":"Modify profile" }}</button>
+			<button class="btn btn-primary btn-block" ng-if="pc.modify" type="submit">Save changes</button>
+		</div>
+	</form>
+</div>

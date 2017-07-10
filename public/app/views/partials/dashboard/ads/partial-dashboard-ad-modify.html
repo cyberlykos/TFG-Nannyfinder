@@ -1,0 +1,67 @@
+<div><a ui-sref="adsList"><button class="btn btn-default">Go back</button></a></div>
+<div class="col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8">
+	<form class="form-auth" name="modifyAdForm" ng-submit="mac.submitForm(modifyAdForm.$valid)" novalidate>
+		<h2 class="form-auth-heading text-center">Edit Ad</h2>
+		<hr>
+		<div class="alert alert-danger"  ng-if="mac.modifyAdError" role="alert">{{ mac.modifyAdMessage }}</div>
+		<div class="alert alert-success"  ng-if="mac.modifyAdSuccess" role="alert">Ad modified successfully!</div>
+		<div class="form-group has-feedback" ng-class="{ 'has-error': modifyAdForm.title.$touched && modifyAdForm.title.$invalid, 'has-success': modifyAdForm.title.$dirty && modifyAdForm.title.$valid }">
+			<label class="sr-only" for="inputTitle">Title</label>
+			<input id="inputTitle" name="title" ng-model="mac.title" class="form-control" type="text" autofocus placeholder="Title of the ad" ng-maxlength="180" ng-trim="false" required/>
+			<span ng-show="modifyAdForm.title.$dirty && modifyAdForm.title.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+			<span ng-show="modifyAdForm.title.$dirty && modifyAdForm.title.$invalid" class="glyphicon glyphicon-remove  form-control-feedback"></span>
+			<span class="form-help word-count text-muted">{{ mac.title.length || 0 }} / 180</span>
+			<div class="help-block with-errors" ng-messages="modifyAdForm.title.$error" ng-if="modifyAdForm.title.$touched">
+				<p ng-message="required">A title is required.</p>
+				<p ng-message="maxlength">Your ad title is too long.</p>
+			</div>
+		</div>
+		<div class="form-group has-feedback" ng-class="{ 'has-error': modifyAdForm.description.$touched && modifyAdForm.description.$invalid, 'has-success': modifyAdForm.description.$dirty && modifyAdForm.description.$valid }">
+			<label class="sr-only" for="inputdescription">Description of the ad</label>
+			<textarea id="inputDescription" name="description" ng-model="mac.description" class="form-control" autofocus placeholder="Description" ng-maxlength="650" required ng-trim="false" rows="8"></textarea>
+			<span ng-show="modifyAdForm.description.$dirty && modifyAdForm.description.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+			<span ng-show="modifyAdForm.description.$dirty && modifyAdForm.description.$invalid" class="glyphicon glyphicon-remove  form-control-feedback"></span>
+			<span class="form-help word-count text-muted">{{ mac.description.length || 0}} / 650</span>
+			<div class="help-block with-errors" ng-messages="modifyAdForm.description.$error" ng-if="modifyAdForm.description.$touched">
+				<p ng-message="required">A description for your ad is required.</p>
+				<p ng-message="maxlength">Your description text is too long.</p>
+			</div>
+		</div>
+		<div ng-show="mac.serviceType !== 2" class="form-group has-feedback" ng-class="{ 'has-error': modifyAdForm.tariffs.$touched && modifyAdForm.tariffs.$invalid, 'has-success': modifyAdForm.tariffs.$dirty && modifyAdForm.tariffs.$valid }">
+			<label class="sr-only" for="inputtariffs">Tariffs</label>
+			<textarea id="inputtariffs" name="tariffs" ng-model="mac.tariffs" class="form-control" type="text" autofocus placeholder="Here you can put your tariffs for every service listed in the ad or any other consideration." ng-maxlength="850" ng-trim="false" rows="12"></textarea>
+			<span ng-show="modifyAdForm.tariffs.$dirty && modifyAdForm.tariffs.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+			<span ng-show="modifyAdForm.tariffs.$dirty && modifyAdForm.tariffs.$invalid" class="glyphicon glyphicon-remove  form-control-feedback"></span>
+			<span class="form-help word-count text-muted">{{ mac.tariffs.length || 0 }} / 850</span>
+			<div class="help-block" ng-messages="modifyAdForm.tariffs.$error" ng-if="modifyAdForm.tariffs.$touched">
+				<p ng-message="maxlength">Your tariffs text is too long. </p>
+			</div>
+		</div>
+		<div class="form-group">
+			<legend class="col-form-legend">Extras</legend>
+			<div class="form-check">
+				<label class="form-check-label">
+					<input class="form-check-input" ng-model="mac.cooking" ng-checked="mac.cooking==true" type="checkbox">&nbsp;Cooking
+				</label>
+			</div>
+			<div class="form-check">
+				<label class="form-check-label">
+					<input class="form-check-input" ng-model="mac.schoolwork" ng-checked="mac.schoolwork==true" type="checkbox">&nbsp;Help with children schoolwork
+				</label>
+			</div>
+			<div class="form-check">
+				<label class="form-check-label">
+					<input class="form-check-input" ng-model="mac.housework" ng-checked="mac.housework==true" type="checkbox">&nbsp;Housework (cleaning, wash dishes...)
+				</label>
+			</div>
+			<div class="form-check">
+				<label class="form-check-label">
+					<input class="form-check-input" ng-model="mac.music" ng-checked="mac.music==true" type="checkbox">&nbsp;Play a instrument
+				</label>
+			</div>
+		</div><div class="form-group">
+		<button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="modifyAdForm.$invalid">Modify</button>
+	</div>
+	
+</form>
+</div>

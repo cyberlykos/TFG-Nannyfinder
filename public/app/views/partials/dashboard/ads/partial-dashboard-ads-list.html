@@ -1,0 +1,43 @@
+<div class="col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8">
+	<div class="page-header">
+		<h1>Ad list</h1>
+	</div>
+	<div>
+		<div class="alert alert-info"  ng-if="alc.adsListInfo" role="alert">{{ alc.adsListInfoMessage }}</div>
+		<div class="alert alert-danger"  ng-if="alc.adsListError" role="alert">{{ alc.adsListErrorMessage }}</div>
+		<div class="panel panel-default" ng-show="alc.ads.length" ng-repeat="ad in alc.ads track by $index" ng-class="{'panel-caregiver': ad.serviceType == 1, 'panel-careseeker': ad.serviceType == 2}">
+			<div class="panel-heading">{{ ad.title }}</div>
+			<div class="panel-body">
+				<p>{{ ad.description }}</p>
+				<p ng-if="ad.tariffs">{{ ad.tariffs }}</p>
+				<hr>
+				<h4>Extra services</h4>
+				<dl class="dl-horizontal">
+					<dt>Cooking</dt>
+					<dd>{{ ad.cooking?'yes':'no' }}</dd>
+					<dt>Housework</dt>
+					<dd>{{ ad.housework?'yes':'no' }}</dd>
+					<dt>Schoolwork</dt>
+					<dd>{{ ad.schoolwork?'yes':'no' }}</dd>
+					<dt>Music</dt>
+					<dd>{{ ad.music?'yes':'no' }}</dd>
+				</dl>
+			</div>
+			<div class="panel-footer text-right">
+				<a ng-click="alc.modifyAd(ad.id)">
+					<button class="btn btn-warning">Modify</button>
+				</a>
+				<a ng-click="alc.delConfirm(ad.id)">
+					<button class="btn btn-danger">Delete</button>
+				</a>
+			</div>
+		</div>
+		<div ng-show="!alc.ads.length && !alc.adsListError">
+			<div class="text-center text-muted">
+				<h2>Yo don't have any ad yet. Create one as</h2>
+				<a ng-click="alc.setServiceType(1)"><button class="btn btn-default btn-lg text-center">Caregiver</button></a>&nbsp;or&nbsp;
+				<a ng-click="alc.setServiceType(2)"><button class="btn btn-default btn-lg text-center">Careseeker</button></a>
+			</div>
+		</div>
+	</div>
+</div>

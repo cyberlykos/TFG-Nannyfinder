@@ -1,0 +1,70 @@
+<!doctype html>
+<html class="no-js" lang="en" ng-app="nannyfinder" ng-cloak>
+	<head>
+		<base href="/">
+		<meta charset="UTF-8">
+		<title>Nannyfinder</title>
+		<meta name="description" content="Nannyfinde TFG using AngularJS, Express and PostgreSQL">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="app/assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="app/assets/css/autocomplete.css">
+		<link rel="stylesheet" href="app/assets/css/main.css">
+	</head>
+	<!-- Main menú -->
+	<nav class="navbar navbar-default" ng-controller="NavController as nc">
+		<ul class="nav navbar-nav pull-right" ng-if="!nc.isAuthenticated()">
+			<li><a ui-sref="signin"><button class="btn btn-default navbar-btn">Sign in</button></a></li>
+		</ul>
+		<ul class="nav navbar-nav pull-right" ng-if="nc.isAuthenticated()">
+			<li><a ui-sref="search"><button class="btn btn-default navbar-btn">Search</button></a></li>
+			<li><a ui-sref="adsList"><button class="btn btn-default navbar-btn">My Ads</button></a></li>
+			<li><a ui-sref="profile"><button class="btn btn-default navbar-btn">My Profile</button></a></li>
+			<li><a ng-click="nc.signOut()"><button class="btn btn-default navbar-btn">Sign out</button></a></li>
+		</ul>
+	</nav>
+	<!-- Brand logo -->
+	<div class="page-header"><a ui-sref="index"><img class="img-responsive logo" src="app/assets/img/nannyfinder_logo2.png"></a></div>
+	<body class="container">
+		<main ui-view></main>
+		<!-- <footer class="footer"><div class="container"><p class="text-muted">by David</p></div></footer> -->
+
+		<!-- Libs -->
+		<script src="app/assets/lib/angular.min.js"></script>
+		<script src="app/assets/lib/angular-cookies.min.js"></script>
+		<script src="app/assets/lib/angular-messages.min.js"></script>
+		<script src="app/assets/lib/angular-animate.min.js"></script>
+		<script src="app/assets/lib/ng-file-upload.min.js"></script>
+		<script src="app/assets/lib/angular-ui-router.min.js"></script>
+		<script src="app/assets/lib/ui-bootstrap.min.js"></script>
+		<script src="app/assets/lib/ng-map.min.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB-dzT-WhD-YzZb4VBgGAJ3gZSgPSUGP6c"></script>
+		<script src="app/assets/lib/autocomplete.js"></script>
+		
+		<!-- App Scripts -->
+
+		<!-- Main app, directives and filters -->
+		<script src="app/app.js"></script>
+		<script src="app/directives/validationDirectives.js"></script>
+		<script src="app/filters/commonFilters.js"></script>
+		<!-- Services -->
+		<script src="app/services/localStorageService.js"></script>
+		<script src="app/services/authService.js"></script>
+		<script src="app/services/signUpMetaService.js"></script>
+		<script src="app/services/authService.js"></script>
+		<script src="app/services/adManagerService.js"></script>
+		<script src="app/services/profileService.js"></script>
+		<script src="app/services/searchService.js"></script>
+		<!-- Controllers -->
+		<script src="app/controllers/navController.js"></script>
+		<script src="app/controllers/auth/signInController.js"></script>
+		<script src="app/controllers/welcomeRegController.js"></script>
+		<script src="app/controllers/auth/signUpCommonController.js"></script>
+		<script src="app/controllers/auth/signUpExtraController.js"></script>
+		<script src="app/controllers/dashboard/profileController.js"></script>
+		<script src="app/controllers/dashboard/adminController.js"></script>
+		<script src="app/controllers/dashboard/ads/adListController.js"></script>
+		<script src="app/controllers/dashboard/ads/createAdController.js"></script>
+		<script src="app/controllers/dashboard/ads/modifyAdController.js"></script>
+		<script src="app/controllers/search/searchController.js"></script>
+	</body>
+</html>

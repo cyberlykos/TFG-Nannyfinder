@@ -1,0 +1,158 @@
+/************************************************************
+	Custom CSS
+************************************************************/
+
+/* 
+  Allow angular.js to be loaded in body, hiding cloaked elements until 
+  templates compile.  The !important is important given that there may be 
+  other selectors that are more specific or come later and might alter display.  
+ */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
+.logo {
+	margin: 10px auto;
+}
+
+.jumbotron {
+  height: 600px;
+  background-color: rgb(255, 255, 255);
+  background-color: rgba(255,255,255,0.6);
+  
+}
+.index-background {
+  border-radius: 14px;
+  background-image: url(../img/background.jpg);
+}
+
+/*------------Default buttons------------*/
+.btn-default {
+    background-color: #EA4E70;
+    border-color: #EA4E70;
+    color: #fff;
+}
+ 
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
+    background-color: #E73259;
+    border-color: #EA4E70;
+    color: #fff;
+}
+ 
+.btn-default:active, .btn-default.active {
+    background-color: #E73259;
+    color: #fff;
+}
+
+/*------------Custom panels------------*/
+.panel-caregiver > .panel-heading {
+  background-color: #EA4E70;
+  color: #fff;
+}
+
+.panel-caregiver > .panel-footer {
+  border-color: #EA4E70;
+}
+
+.panel-caregiver {
+  border-color: #EA4E70;
+}
+
+.panel-careseeker > .panel-heading {
+  background: #C7506F;
+  color: #fff;
+}
+
+.panel-careseeker {
+  border-color: #C7506F;
+}
+
+.panel-careseeker > .panel-footer {
+  border-color: #C7506F;
+}
+
+.panel-description {
+  white-space: pre-wrap;
+}
+
+/*------------Search panels resize------------*/
+
+.dl-custom {
+  width: 100%;
+  overflow: hidden;
+}
+
+.dl-custom > dt {
+  width: 50%;
+  float: left;
+}
+
+.dl-custom > dd {
+  width: 50%;
+  float: left;
+}
+
+/*------------Text area resize------------*/
+.form-inline {
+  padding-right: 40px;
+}
+
+.form-search {
+  padding: 25px;
+  background-color: #fafafa;
+}
+
+
+/*------------Text area resize------------*/
+.form-group {
+  overflow: hidden;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.word-count {
+  float: right;
+}
+
+/*------------Fade effect when transiting between views------------*/
+
+/* start 'enter' transition on main view */
+main.ng-enter {
+    /* transition on enter for .5s */
+    transition: .5s;
+
+    /* start with opacity 0 (invisible) */
+    opacity: 0;
+}
+
+/* end 'enter' transition on main view */
+main.ng-enter-active {
+    /* end with opacity 1 (fade in) */
+    opacity: 1;
+}
+
+/*------------Sticky footer------------*/
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+.text-muted {
+	margin-top: 20px;
+}
+

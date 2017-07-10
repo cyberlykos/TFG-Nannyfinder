@@ -1,0 +1,84 @@
+<div class="col-xs-offset-2 col-xs-8 col-sm-offset-8 col-sm-8 col-md-offset-4 col-md-4">
+	<form class="form-auth" name="signUpCommonForm" ng-submit="sgnUpcc.submitForm(signUpCommonForm.$valid)" novalidate>
+		<h2 class="form-auth-heading text-center">Sign Up</h2>
+		<hr>
+		<div class="alert alert-danger"  ng-if="sgnUpcc.signInError" role="alert">{{ sgnUpcc.signUpErrorMessage }}</div>
+		<div class="alert alert-success"  ng-if="sgnUpcc.signUpSuccess" role="alert">Account created! Now, you can <a ui-sref="signin">login</a> and create your first ad.</div>
+		<div class="form-group">
+			<label class="sr-only" for="inputAddress">Address</label>
+			<input id="inputAddress" name="address" type="text" class="form-control" g-places-autocomplete force-selection="true" options="sgnUpcc.autoCompleteOptions" ng-model="sgnUpcc.address" placeholder="Insert a City, Address, Postal Code..." autocomplete="off" />
+		</div>
+		<div class="form-group has-feedback" ng-class="{ 'has-error': signUpCommonForm.firstName.$dirty && signUpCommonForm.firstName.$invalid, 'has-success': signUpCommonForm.firstName.$dirty && signUpCommonForm.firstName.$valid }">
+			<label class="sr-only" for="inputfirstName">First name</label>
+			<input id="inputfirstName" name="firstName" ng-model="sgnUpcc.firstName" class="form-control" type="text" autofocus placeholder="First name" ng-maxlength="256" required/>
+			<span ng-show="signUpCommonForm.firstName.$dirty && signUpCommonForm.firstName.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+			<span ng-show="signUpCommonForm.firstName.$dirty && signUpCommonForm.firstName.$invalid" class="glyphicon glyphicon-remove  form-control-feedback"></span>
+			<div class="help-block with-errors" ng-messages="signUpCommonForm.firstName.$error" ng-if="signUpCommonForm.firstName.$dirty">
+				<p ng-message="required">Your first name is required.</p>
+				<p ng-message="maxlength">Your first name is too long.</p>
+			</div>
+		</div>
+		<div class="form-group has-feedback" ng-class="{ 'has-error': signUpCommonForm.lastName.$dirty && signUpCommonForm.lastName.$invalid, 'has-success': signUpCommonForm.lastName.$dirty && signUpCommonForm.lastName.$valid }">
+			<label class="sr-only" for="inputLastName">Last name</label>
+			<input id="inputLastName" name="lastName" ng-model="sgnUpcc.lastName" class="form-control" type="text" autofocus placeholder="Last name" ng-maxlength="256" required/>
+			<span ng-show="signUpCommonForm.lastName.$dirty && signUpCommonForm.lastName.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+			<span ng-show="signUpCommonForm.lastName.$dirty && signUpCommonForm.lastName.$invalid" class="glyphicon glyphicon-remove  form-control-feedback"></span>
+			<div class="help-block with-errors" ng-messages="signUpCommonForm.lastName.$error" ng-if="signUpCommonForm.lastName.$dirty">
+				<p ng-message="required">Your last name is required.</p>
+				<p ng-message="maxlength">Your last name is too long.</p>
+			</div>
+		</div>
+		<div class="form-group has-feedback" ng-class="{ 'has-error': signUpCommonForm.phoneNumber.$dirty && signUpCommonForm.phoneNumber.$invalid, 'has-success': signUpCommonForm.phoneNumber.$dirty && signUpCommonForm.phoneNumber.$valid }">
+			<label class="sr-only" for="inputPhoneNumber">Phone Number</label>
+			<input id="inputPhoneNumber" name="phoneNumber" ng-model="sgnUpcc.phoneNumber" class="form-control" type="text" autofocus placeholder="Phone number (example: 953898989)" ng-maxlength="32" phone-validator required/>
+			<span ng-show="signUpCommonForm.phoneNumber.$dirty && signUpCommonForm.phoneNumber.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+			<span ng-show="signUpCommonForm.phoneNumber.$dirty && signUpCommonForm.phoneNumber.$invalid" class="glyphicon glyphicon-remove  form-control-feedback"></span>
+			<div class="help-block" ng-messages="signUpCommonForm.phoneNumber.$error" ng-if="signUpCommonForm.phoneNumber.$dirty">
+				<p ng-message="required">Your phone number is required.</p>
+				<p ng-message="maxlength">Your phone number is too long.</p>
+				<p ng-message="phone-validator">Enter a valid phone number.</p>
+			</div>
+		</div>
+		<div class="form-group has-feedback" ng-class="{ 'has-error': signUpCommonForm.email.$dirty && signUpCommonForm.email.$invalid, 'has-success': signUpCommonForm.email.$dirty && signUpCommonForm.email.$valid }">
+			<label class="sr-only" for="inputEmail">Email</label>
+			<input id="inputEmail" name="email" ng-model="sgnUpcc.email" class="form-control" type="email" autofocus placeholder="Email (example: you@email.com)" ng-maxlength="320" required/>
+			<span ng-show="signUpCommonForm.email$dirty && signUpCommonForm.email.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+			<span ng-show="signUpCommonForm.email.$dirty && signUpCommonForm.email.$invalid" class="glyphicon glyphicon-remove  form-control-feedback"></span>
+			<div class="help-block" ng-messages="signUpCommonForm.email.$error" ng-if="signUpCommonForm.email.$dirty">
+				<p ng-message="required">Your email is required. You will use it for signing in later :)</p>
+				<p ng-message="maxlength">Your email is too long.</p>
+				<p ng-message="email">Please, enter a valid email.</p>
+			</div>
+		</div>
+		<hr>
+		<div class="alert alert-info" ng-if="signUpCommonForm.password.$invalid && signUpCommonForm.passwordR.$invalid">Passwords must contain at least one uppercase letter, one lowercase, and a number.</div>
+		<div class="form-group has-feedback" ng-class="{ 'has-error': signUpCommonForm.password.$dirty && signUpCommonForm.password.$invalid, 'has-success': signUpCommonForm.email.$dirty && signUpCommonForm.password.$valid }">
+			<label class="sr-only" for="inputPassword">Password</label>
+			<input id="inputPassword" name="password" ng-model="sgnUpcc.password" class="form-control" type="password" autofocus placeholder="Enter your password" ng-minlength="8" ng-maxlength="256" password-validator required>
+			<span ng-show="signUpCommonForm.password.$dirty && signUpCommonForm.password.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+			<span ng-show="signUpCommonForm.password.$dirty && signUpCommonForm.password.$invalid" class="glyphicon glyphicon-remove  form-control-feedback"></span>
+			<div class="help-block" ng-messages="signUpCommonForm.password.$error" ng-if="signUpCommonForm.password.$dirty">
+				<p ng-message="required">Please, fullfill correctly the password field</p>
+				<p ng-message="minlength">Passwords is too short! Must contain at least 8 characters</p>
+				<p ng-message="maxlength=">Passwords is too long</p>
+				<p ng-message="password-validator">Passwords must contain at least one uppercase letter, one lowercase, and a number.</p>
+			</div>
+		</div>
+		<div class="form-group has-feedback" ng-class="{ 'has-error': signUpCommonForm.passwordR.$dirty && signUpCommonForm.passwordR.$invalid, 'has-success': signUpCommonForm.passwordR.$dirty && signUpCommonForm.passwordR.$valid }">
+			<label class="sr-only" for="inputPasswordR">PasswordRepeat</label>
+			<input id="inputPasswordR" name="passwordR" ng-model="sgnUpcc.passwordR" class="form-control" type="password" autofocus placeholder="Repeat your password" ng-minlength="8" ng-maxlength="256" password-validator required compare-to="sgnUpcc.password">
+			<span ng-show="signUpCommonForm.passwordR.$dirty && signUpCommonForm.passwordR.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+			<span ng-show="signUpCommonForm.passwordR.$dirty && signUpCommonForm.passwordR.$invalid" class="glyphicon glyphicon-remove  form-control-feedback"></span>
+			<div class="help-block" ng-messages="signUpCommonForm.passwordR.$error" ng-if="signUpCommonForm.passwordR.$dirty">
+				<ng-messages for="myform.name.$error">
+				<p ng-message="required">Please, fullfill correctly the repeat password field</p>
+				<p ng-message="minlength">Passwords is too short! Must contain at least 8 characters</p>
+				<p ng-message="maxlength=">Passwords is too long</p>
+				<p ng-message="compareTo">Passwords doesn't match!</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="signUpCommonForm.$invalid && regType !== 0">I'm in!</button>
+		</div>
+	</form>
+</div>

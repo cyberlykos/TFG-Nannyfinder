@@ -1,0 +1,33 @@
+{
+  "name": "nannyfinder",
+  "version": "1.0.0",
+  "description": "Proyecto TFG",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "David Morillo Espejo",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.6.3",
+    "angular-animate": "^1.6.4",
+    "angular-cookies": "^1.6.4",
+    "angular-messages": "^1.6.4",
+    "angular-ui-router": "^0.4.2",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "jsonwebtoken": "^7.3.0",
+    "morgan": "^1.8.1",
+    "ng-file-upload": "^12.2.13",
+    "ngmap": "^1.18.4",
+    "node-gyp": "^3.6.1",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
+    "pg": "^6.2.2",
+    "sequelize": "^3.30.4",
+    "serve-favicon": "^2.4.3",
+    "ui-bootstrap": "^0.1.10"
+  }
+}

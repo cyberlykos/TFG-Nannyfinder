@@ -1,0 +1,67 @@
+<div><a ui-sref="adsList"><button class="btn btn-default">Go back</button></a></div>
+<div class="col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8">
+	<form class="form-auth" name="createAdForm" ng-submit="cac.submitForm(createAdForm.$valid)" novalidate>
+		<h2 class="form-auth-heading text-center">New Ad</h2>
+		<hr>
+		<div class="alert alert-danger"  ng-if="cac.createAdError" role="alert">{{ cac.createAdMessage }}</div>
+		<div class="alert alert-success"  ng-if="cac.createAdSuccess" role="alert">Ad created successfully!</div>
+		<div class="form-group has-feedback" ng-class="{ 'has-error': createAdForm.title.$touched && createAdForm.title.$invalid, 'has-success': createAdForm.title.$dirty && createAdForm.title.$valid }">
+			<label class="sr-only" for="inputTitle">Title</label>
+			<input id="inputTitle" name="title" ng-model="cac.title" class="form-control" type="text" autofocus placeholder="Title of the ad" ng-maxlength="180" ng-trim="false" required/>
+			<span ng-show="createAdForm.title.$dirty && createAdForm.title.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+			<span ng-show="createAdForm.title.$dirty && createAdForm.title.$invalid" class="glyphicon glyphicon-remove  form-control-feedback"></span>
+			<span class="form-help word-count text-muted">{{ cac.title.length || 0}} / 180</span>
+			<div class="help-block with-errors" ng-messages="createAdForm.title.$error" ng-if="createAdForm.title.$touched">
+				<p ng-message="required">A title is required.</p>
+				<p ng-message="maxlength">Your ad title is too long.</p>
+			</div>
+		</div>
+		<div class="form-group has-feedback" ng-class="{ 'has-error': createAdForm.description.$touched && createAdForm.description.$invalid, 'has-success': createAdForm.description.$dirty && createAdForm.description.$valid }">
+			<label class="sr-only" for="inputdescription">Description of the ad</label>
+			<textarea id="inputDescription" name="description" ng-model="cac.description" class="form-control" autofocus placeholder="Description" ng-maxlength="1200" required ng-trim="false" rows="8"></textarea>
+			<span ng-show="createAdForm.description.$dirty && createAdForm.description.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+			<span ng-show="createAdForm.description.$dirty && createAdForm.description.$invalid" class="glyphicon glyphicon-remove  form-control-feedback"></span>
+			<span class="form-help word-count text-muted">{{ cac.description.length || 0}} / 1200</span>
+			<div class="help-block with-errors" ng-messages="createAdForm.description.$error" ng-if="createAdForm.description.$touched">
+				<p ng-message="required">A description for your ad is required.</p>
+				<p ng-message="maxlength">Your description text is too long.</p>
+			</div>
+		</div>
+		<div ng-show="cac.serviceType !== 2" class="form-group has-feedback" ng-class="{ 'has-error': createAdForm.tariffs.$touched && createAdForm.tariffs.$invalid, 'has-success': createAdForm.tariffs.$dirty && createAdForm.tariffs.$valid }">
+			<label class="sr-only" for="inputtariffs">Tariffs</label>
+			<textarea id="inputtariffs" name="tariffs" ng-model="cac.tariffs" class="form-control" type="text" autofocus placeholder="Here you can put your tariffs for every service listed in the ad or any other consideration." ng-maxlength="850" ng-trim="false" rows="12"></textarea>
+			<span ng-show="createAdForm.tariffs.$dirty && createAdForm.tariffs.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+			<span ng-show="createAdForm.tariffs.$dirty && createAdForm.tariffs.$invalid" class="glyphicon glyphicon-remove  form-control-feedback"></span>
+			<span class="form-help word-count text-muted">{{ cac.tariffs.length || 0 }} / 850</span>
+			<div class="help-block" ng-messages="createAdForm.tariffs.$error" ng-if="createAdForm.tariffs.$touched">
+				<p ng-message="maxlength">Your tariffs text is too long. </p>
+			</div>
+		</div>
+		<div class="form-group">
+			<legend class="col-form-legend">Extras</legend>
+			<div class="form-check">
+				<label class="form-check-label">
+					<input class="form-check-input" ng-model="cac.cooking" type="checkbox">&nbsp;Cooking
+				</label>
+			</div>
+			<div class="form-check">
+				<label class="form-check-label">
+					<input class="form-check-input" ng-model="cac.schoolwork" type="checkbox">&nbsp;Help with children schoolwork
+				</label>
+			</div>
+			<div class="form-check">
+				<label class="form-check-label">
+					<input class="form-check-input" ng-model="cac.housework" type="checkbox">&nbsp;Housework (cleaning, wash dishes...)
+				</label>
+			</div>
+			<div class="form-check">
+				<label class="form-check-label">
+					<input class="form-check-input" ng-model="cac.music" type="checkbox">&nbsp;Play a instrument
+				</label>
+			</div>
+		</div><div class="form-group">
+		<button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="createAdForm.$invalid && cac.serviceType !== 0">Create</button>
+	</div>
+	
+</form>
+</div>

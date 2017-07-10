@@ -1,0 +1,15 @@
+<div class="index-background flex-wrap">
+	<div class="jumbotron text-center" ng-controller="WelcomeRegController as wrc">
+		<h1>Welcome to Nannyfinder!</h1>
+		<p>We are the perfect solution for those who search for the best
+		care of your family.</p>
+		<p>Before starting, you must register on our network as a </p>
+		<a ng-click="wrc.setRegType(1)">
+			<button class="btn btn-default btn-lg">Caregiver</button>
+		</a>
+		&nbsp; or a &nbsp;
+		<a ng-click="wrc.setRegType(2)">
+			<button class="btn btn-default btn-lg">Careseeker</button>
+		</a>
+	</div>
+</div>

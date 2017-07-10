@@ -1,0 +1,77 @@
+<div class="col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8">
+	<div class="page-header">
+		<h1>Ads search</h1>
+	</div>
+	<form class="form-inline form-search">
+		<div class="form-group">
+			<label class="form-check-label form-inline">
+				<input class="form-check-input" type="radio" ng-model="shc.searchType" ng-value="0" ng-change="shc.switchSearchType()">&nbsp;All
+			</label>
+		</div>
+		<div class="form-group">
+			<label class="form-check-label form-inline">
+				<input class="form-check-input" type="radio" ng-model="shc.searchType" ng-value="1" ng-change="shc.switchSearchType()">&nbsp;Caregiver
+			</label>
+		</div>
+		<div class="form-group">
+			<label class="form-check-label form-inline">
+				<input class="form-check-input" type="radio" ng-model="shc.searchType" ng-value="2" ng-change="shc.switchSearchType()">&nbsp;Careseeker
+			</label>
+		</div>
+	</form>
+	<div>
+		<div class="alert alert-info"  ng-if="shc.searchInfo" role="alert">{{ shc.searchInfoMessage }}</div>
+		<div class="alert alert-danger"  ng-if="shc.searchError" role="alert">{{ shc.searchtErrorMessage }}</div>
+		<div class="panel panel-default" ng-show="shc.ads.length" ng-repeat="ad in shc.ads track by ad.id" ng-class="{'panel-caregiver': ad.serviceType == 1, 'panel-careseeker': ad.serviceType == 2}">
+			<div class="panel-heading align-self-lg-baseline">
+				<div class="float-left"><img class="img-thumbnail" ng-src="app/assets/img/profile/{{ ad.User.photo }}" width="128px"/></div>
+				<div class="float-right"><h2>{{ ad.User.firstName }}</h2></div>
+				<div class="float-right"><h3>{{ ad.title }}</h3></div>
+			</div>
+			<div class="panel-body">
+				<p class="panel-description">{{ ad.description }}</p>
+				<button class="btn btn-info" ng-click="active = ! active">Show details</button>
+				<div ng-show="active">
+					<div ng-if="ad.tariffs">
+						<hr>
+						<h4>Tariffs</h4>
+						<p>{{ ad.tariffs }}</p>
+					</div>
+					<hr>
+					<h4>{{ ad.serviceType==1?"Extra services":"Required services"}}</h4>
+					<dl class="dl-vertical dl-custom">
+						<dt>Cooking</dt>
+						<dd>{{ ad.cooking?'yes':'no' }}</dd>
+						<dt>Housework</dt>
+						<dd>{{ ad.housework?'yes':'no' }}</dd>
+						<dt>Help with children schoolwork</dt>
+						<dd>{{ ad.schoolwork?'yes':'no' }}</dd>
+						<dt>Music</dt>
+						<dd>{{ ad.music?'yes':'no' }}</dd>
+					</dl>
+					<dl ng-if="ad.serviceType==1" class="dl-vertical dl-custom">
+						<dt>Experience</dt>
+						<dd>{{ ad.User.experience }}</dd>
+						<dt>Socio-cultural animator</dt>
+						<dd>{{ ad.User.monitor?'yes':'no' }}</dd>
+						<dt>First Aid or Lifeguard</dt>
+						<dd>{{ ad.User.firstAid?'yes':'no' }}</dd>
+						<dt>Degree in Early Childhood Education</dt>
+						<dd>{{ ad.User.eduTitle?'yes':'no' }}</dd>
+						<dt>Drive License</dt>
+						<dd>{{ ad.User.driveLicense?'yes':'no' }}</dd>
+					</dl>
+					<hr>
+					<div class="float-right col-sm-6 col-md-6" map-lazy-load="https://maps.google.com/maps/api/js">
+						<ng-map center="{{ ad.User.address.viewport.north }}, {{ ad.User.address.viewport.west }}" zoom="12" disable-default-u-i="true">
+						<marker position="{{ ad.User.address.viewport.north }}, {{ ad.User.address.viewport.west }}" ></marker>
+						</ng-map>
+					</div>
+					<div class="float-right col-sm-6 col-md-6">
+						<h4>Contact</h4>
+						<h4><span class="glyphicon glyphicon-phone"></span>&nbsp;{{ad.User.phoneNumber}}</h4>
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer text-right">
+			</div>

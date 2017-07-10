@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.0-beta" last-position="0,0" last-zoom="1"
+	 default-schema="public" default-owner="postgres">
+<role name="nannyfinder"
+      superuser="true"
+      inherit="true"
+      login="true"
+      encrypted="true"
+      password="********">
+</role>
+
+<role name="admin"
+      inherit="true"
+      login="true"
+      encrypted="true"
+      password="********">
+</role>
+
+<database name="nannyfinder" encoding="UTF8" lc-collate="es_ES.UTF-8" lc-ctype="es_ES.UTF-8">
+	<role name="admin"/>
+	<tablespace name="pg_default"/>
+</database>
+
+<schema name="public" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<sequence name="User_ID_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="admin"/>
+</sequence>
+
+<table name="User">
+	<schema name="public"/>
+	<role name="admin"/>
+	<position x="60" y="63"/>
+	<column name="id" not-null="true" sequence="public.&quot;User_ID_seq&quot;">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="character varying" length="320"/>
+	</column>
+	<column name="password" not-null="true">
+		<type name="character varying" length="256"/>
+	</column>
+	<column name="firstName" not-null="true">
+		<type name="character varying" length="85"/>
+	</column>
+	<column name="lastName" not-null="true">
+		<type name="character varying" length="256"/>
+	</column>
+	<column name="address" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="phoneNumber" not-null="true">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="experience" default-value="'No experience'">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="firstAid" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="monitor" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="eduTitle" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="smoker" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="photo" default-value="'default.svg'">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="role">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="username">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="createdAt">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="updatedAt">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="driveLicense" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<constraint name="PK_USER" type="pk-constr" table="public.&quot;User&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="User_username_key" type="uq-constr" table="public.&quot;User&quot;">
+		<columns names="username" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="uq_email" type="uq-constr" table="public.&quot;User&quot;">
+		<columns names="email" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="Ad_ID_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="admin"/>
+</sequence>
+
+<table name="Ad">
+	<schema name="public"/>
+	<role name="admin"/>
+	<position x="440" y="63"/>
+	<column name="id" not-null="true" sequence="public.&quot;Ad_ID_seq&quot;">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="serviceType" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="title" not-null="true">
+		<type name="character varying" length="350"/>
+	</column>
+	<column name="description" not-null="true">
+		<type name="character varying" length="1200"/>
+	</column>
+	<column name="tariffs">
+		<type name="character varying" length="850"/>
+	</column>
+	<column name="cooking" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="housework" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="schoolwork" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="music" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="UserId" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="createdAt">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="updatedAt">
+		<type name="character varying" length="0"/>
+	</column>
+	<constraint name="PK_AD" type="pk-constr" table="public.&quot;Ad&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="Languages_ID_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="Languages">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="820" y="63"/>
+	<column name="id" not-null="true" sequence="public.&quot;Languages_ID_seq&quot;">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="256"/>
+	</column>
+	<column name="level" default-value="0">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="PK_LANG" type="pk-constr" table="public.&quot;Languages&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="User_Lang">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1140" y="63"/>
+	<column name="id_user" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="id_lang" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="PK_USER_LANG" type="pk-constr" table="public.&quot;User_Lang&quot;">
+		<columns names="id_user,id_lang" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="databasechangeloglock">
+	<schema name="public"/>
+	<role name="nannyfinder"/>
+	<position x="1460" y="63"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="locked" not-null="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="lockgranted">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="lockedby">
+		<type name="character varying" length="255"/>
+	</column>
+	<constraint name="pk_databasechangeloglock" type="pk-constr" table="public.databasechangeloglock">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="databasechangelog">
+	<schema name="public"/>
+	<role name="nannyfinder"/>
+	<position x="60" y="463"/>
+	<column name="id" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="author" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="filename" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="dateexecuted" not-null="true">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="orderexecuted" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="exectype" not-null="true">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="md5sum">
+		<type name="character varying" length="35"/>
+	</column>
+	<column name="description">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="comments">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="tag">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="liquibase">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="contexts">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="labels">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="deployment_id">
+		<type name="character varying" length="10"/>
+	</column>
+</table>
+
+<sequence name="hibernate_sequence"
+	 start="1000" increment="50"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="nannyfinder"/>
+</sequence>
+
+<table name="jhi_user">
+	<schema name="public"/>
+	<role name="nannyfinder"/>
+	<position x="420" y="463"/>
+	<column name="id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="login" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="password_hash">
+		<type name="character varying" length="60"/>
+	</column>
+	<column name="first_name">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="last_name">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="email">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="image_url">
+		<type name="character varying" length="256"/>
+	</column>
+	<column name="activated" not-null="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="lang_key">
+		<type name="character varying" length="5"/>
+	</column>
+	<column name="activation_key">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="reset_key">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="created_by" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="created_date" not-null="true">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="reset_date">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="last_modified_by">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="last_modified_date">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="pk_jhi_user" type="pk-constr" table="public.jhi_user">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="jhi_user_login_key" type="uq-constr" table="public.jhi_user">
+		<columns names="login" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="jhi_user_email_key" type="uq-constr" table="public.jhi_user">
+		<columns names="email" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_user_login" table="public.jhi_user"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="login"/>
+		</idxelement>
+</index>
+
+<index name="idx_user_email" table="public.jhi_user"
+	 concurrent="false" unique="true" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="email"/>
+		</idxelement>
+</index>
+
+<table name="jhi_authority">
+	<schema name="public"/>
+	<role name="nannyfinder"/>
+	<position x="820" y="463"/>
+	<column name="name" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="pk_jhi_authority" type="pk-constr" table="public.jhi_authority">
+		<columns names="name" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="jhi_user_authority">
+	<schema name="public"/>
+	<role name="nannyfinder"/>
+	<position x="1180" y="463"/>
+	<column name="user_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="authority_name" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="jhi_user_authority_pkey" type="pk-constr" table="public.jhi_user_authority">
+		<columns names="user_id,authority_name" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="jhi_persistent_token">
+	<schema name="public"/>
+	<role name="nannyfinder"/>
+	<position x="1580" y="463"/>
+	<column name="series" not-null="true">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="user_id">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="token_value" not-null="true">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="token_date">
+		<type name="date" length="0"/>
+	</column>
+	<column name="ip_address">
+		<type name="character varying" length="39"/>
+	</column>
+	<column name="user_agent">
+		<type name="character varying" length="255"/>
+	</column>
+	<constraint name="pk_jhi_persistent_token" type="pk-constr" table="public.jhi_persistent_token">
+		<columns names="series" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="jhi_persistent_audit_event">
+	<schema name="public"/>
+	<role name="nannyfinder"/>
+	<position x="60" y="863"/>
+	<column name="event_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="principal" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="event_date">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="event_type">
+		<type name="character varying" length="255"/>
+	</column>
+	<constraint name="pk_jhi_persistent_audit_event" type="pk-constr" table="public.jhi_persistent_audit_event">
+		<columns names="event_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="jhi_persistent_audit_evt_data">
+	<schema name="public"/>
+	<role name="nannyfinder"/>
+	<position x="500" y="863"/>
+	<column name="event_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="150"/>
+	</column>
+	<column name="value">
+		<type name="character varying" length="255"/>
+	</column>
+	<constraint name="jhi_persistent_audit_evt_data_pkey" type="pk-constr" table="public.jhi_persistent_audit_evt_data">
+		<columns names="event_id,name" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_persistent_audit_event" table="public.jhi_persistent_audit_event"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="principal"/>
+		</idxelement>
+		<idxelement use-sorting="false">
+			<column name="event_date"/>
+		</idxelement>
+</index>
+
+<index name="idx_persistent_audit_evt_data" table="public.jhi_persistent_audit_evt_data"
+	 concurrent="false" unique="false" fast-update="false" buffering="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="event_id"/>
+		</idxelement>
+</index>
+
+<constraint name="fk_ad_user" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.&quot;User&quot;" table="public.&quot;Ad&quot;">
+	<columns names="UserId" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="FK_USER_USERLANG" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.&quot;User&quot;" table="public.&quot;User_Lang&quot;">
+	<columns names="id_user" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="FK_LANG_USERLANG" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;Languages&quot;" table="public.&quot;User_Lang&quot;">
+	<columns names="id_lang" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_authority_name" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.jhi_authority" table="public.jhi_user_authority">
+	<columns names="authority_name" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_user_id" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.jhi_user" table="public.jhi_user_authority">
+	<columns names="user_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_user_persistent_token" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.jhi_user" table="public.jhi_persistent_token">
+	<columns names="user_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_evt_pers_audit_evt_data" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.jhi_persistent_audit_event" table="public.jhi_persistent_audit_evt_data">
+	<columns names="event_id" ref-type="src-columns"/>
+	<columns names="event_id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="&quot;rel_Ad_User&quot;" type="relfk"
+	 custom-color="#c033b5"
+	 src-table="public.&quot;Ad&quot;"
+	 dst-table="public.&quot;User&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_User_Lang_User&quot;" type="relfk"
+	 custom-color="#9b372b"
+	 src-table="public.&quot;User_Lang&quot;"
+	 dst-table="public.&quot;User&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_User_Lang_Languages&quot;" type="relfk"
+	 custom-color="#2d2984"
+	 src-table="public.&quot;User_Lang&quot;"
+	 dst-table="public.&quot;Languages&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_jhi_user_authority_jhi_authority" type="relfk"
+	 custom-color="#c324e9"
+	 src-table="public.jhi_user_authority"
+	 dst-table="public.jhi_authority"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_jhi_user_authority_jhi_user" type="relfk"
+	 custom-color="#5ff454"
+	 src-table="public.jhi_user_authority"
+	 dst-table="public.jhi_user"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_jhi_persistent_token_jhi_user" type="relfk"
+	 custom-color="#568026"
+	 src-table="public.jhi_persistent_token"
+	 dst-table="public.jhi_user"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_jhi_persistent_audit_evt_data_jhi_persistent_audit_event" type="relfk"
+	 custom-color="#5291d1"
+	 src-table="public.jhi_persistent_audit_evt_data"
+	 dst-table="public.jhi_persistent_audit_event"
+	 src-required="false" dst-required="false"/>
+
+<permission>
+	<object name="nannyfinder" type="database"/>
+	<privileges connect="true" temporary="true"/>
+</permission>
+<permission>
+	<object name="nannyfinder" type="database"/>
+	<roles names="admin"/>
+	<privileges create="true" connect="true" temporary="true"/>
+</permission>
+</dbmodel>

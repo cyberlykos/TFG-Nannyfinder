@@ -1,0 +1,10 @@
+<div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
+	<form class="form-auth">
+		<h2 class="form-auth-heading text-center">Sign in</h2>
+		<div class="alert alert-danger"  ng-if="sgnInc.signInError" role="alert">{{ sgnInc.signInErrorMessage }}</div>
+		<label class="sr-only" for="inputEmail">Email</label>
+		<input id="inputEmail" ng-model="sgnInc.email" class="form-control" type="text" autofocus="" placeholder="Enter your email" required=""/><br>
+		<input id="inputPassword" ng-model="sgnInc.password" class="form-control" type="password" autofocus="" placeholder="Enter your password" required=""><br>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="sgnInc.signIn()">Enter</button>
+	</form>
+</div>
